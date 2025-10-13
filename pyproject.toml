@@ -4,4 +4,17 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.14"
-dependencies = []
+dependencies = [
+    "aiohttp>=3.13.0",
+    "aiopg>=1.4.0",
+    "aioredis>=2.0.1",
+    "dotenv>=0.9.9",
+    "fastapi[standard]>=0.118.3",
+    "pytest>=8.4.2",
+    "redis>=6.4.0",
+    "requests>=2.32.5",
+]
+
+[tool.ruff]
+lint.extend-select = ["ALL"]
+lint.ignore = []
