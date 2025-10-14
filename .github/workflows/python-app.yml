@@ -1,0 +1,39 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+
+name: Python application
+
+on:
+    push:
+        branches: [ "main" ]
+    pull_request:
+        branches: [ "main" ]
+
+permissions:
+    contents: read
+
+jobs:
+    build:
+
+        runs-on: ubuntu-latest
+
+        steps:
+        - uses: actions/checkout@v5
+        - name: Set up Python 3.14
+          uses: actions/setup-python@v6
+          with:
+              python-version: "3.14"
+
+        - name: Install libraries for checking code quality
+          run: |
+              curl -LsSf https://astral.sh/uv/install.sh | sh
+              uv self update
+              uv tool install ruff 
+              uv tool install mypy 
+              uv tool install pytest
+        
+        - name: Check python code quality
+          run: |
+              uv run ruff check .
+              uv run mypy .
+              uv run pytest .
